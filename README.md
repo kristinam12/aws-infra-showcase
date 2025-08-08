@@ -24,6 +24,12 @@ Key components:
 
 This setup allows you to deploy containerized applications on Kubernetes in a scalable way, while offloading operational overhead to AWS.
 
+## K8s Deployment
+After the EKS cluster is created, you configure your local environment to connect to it via kubectl. The kubeconfig file contains the necessary authentication and endpoint info.
+
+You then deploy your application manifests (YAML files defining deployments and services) to run your app in Kubernetes pods. The deployment manages the number of replicas (copies) of your app to run for availability. A service of type LoadBalancer exposes your app publicly, routing internet traffic to your pods.
+
+## Project directory set up:
 ```
 aws-java-mongo-demo/
 ├── app/                    # Java Spring Boot app 
@@ -36,5 +42,21 @@ aws-java-mongo-demo/
 └── README.md
 ```
 
-Terraform commands to initiate:
-`terraform init`, `terraform plan`, `terraform apply` `terraform destroy`
+## Commands:
+Initialize Terraform:
+```terraform init```
+
+Preview infrastructure changes:
+```terraform plan```
+
+Apply changes and create infra (VPC, EKS, etc):
+```terraform apply```
+
+Configure local kubeconfig to connect kubectl to EKS cluster:
+```aws eks --region eu-central-2 update-kubeconfig --name aws-infra-showcase-eks```
+
+Apply your Kubernetes manifests (deployments, services):
+```kubectl apply -f k8s/```
+
+Verify service and get external IP or DNS
+```kubectl get svc demo-service```

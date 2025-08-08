@@ -1,0 +1,14 @@
+# The Service exposes the deployment via an external Load Balancer,
+# allowing public internet access to the app.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: demo-app
+  ports:
+    - port: 80
+      targetPort: 80
