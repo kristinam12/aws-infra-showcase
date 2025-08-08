@@ -1,5 +1,5 @@
 # Defines the virtual private cloud and basic networking components
-(Minimal setup to run public-facing resources like EC2, EKS, ALB)
+# (Minimal setup to run public-facing resources like EC2, EKS, ALB)
 # Creates a VPC, public subnet in a specified AZ, an internet gateway, a route table that sends outbound traffic to the internet and a connection between the subnet and route table
 
 # Set the AWS region for all resources

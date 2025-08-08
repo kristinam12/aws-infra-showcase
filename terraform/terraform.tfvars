@@ -1,0 +1,5 @@
+aws_region         = "eu-central-1"
+project_name       = "aws-infra-showcase"
+vpc_cidr           = "10.0.0.0/16"
+public_subnet_cidr = "10.0.1.0/24"
+aws_zone           = "eu-central-1a"

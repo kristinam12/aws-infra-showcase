@@ -1,5 +1,5 @@
 # aws-infra-showcase
-Demo project showcasing a Java application deployed to AWS using Terraform
+Demo project showcasing a Java backend API deployed to AWS using Terraform
 
 ## VPC Layer
 This configuration provisions the foundational networking layer in AWS using a Virtual Private Cloud (VPC). It sets up the core infrastructure required to deploy resources with internet access and public IP assignment.
@@ -26,6 +26,7 @@ This setup allows you to deploy containerized applications on Kubernetes in a sc
 
 # Set up infrastructure with Terraform:
 - Navigate to: ```cd aws-infra-showcase/terraform```
+- Login AWS: ```aws configure```
 - Initialize Terraform:
 ```terraform init```       
 - Preview the infrastructure changes Terraform will make:
@@ -35,8 +36,8 @@ This setup allows you to deploy containerized applications on Kubernetes in a sc
 - Destroy all Terraform-managed infrastructure:
 ```terraform destroy```
 
-## Task API - Java Sprint Boot
-A simple Java Sprint Boot REST API (https://start.spring.io/) to manage tasks as the backend component for task management &  this demo project.
+## Task API - Java Spring Boot
+A simple Java Spring Boot REST API (https://start.spring.io/) to manage tasks as the backend component for task management & this demo project.
 It exposes endpoints (e.g., /api/tasks) to create, read, update, and delete tasks. This API is part of the overall app infrastructure, designed to be deployed on AWS EKS with Terraform.
 
 For local testing purposes:
@@ -61,7 +62,7 @@ For building the image:
 For pushing the image to ECR:
 - Authenticate your Docker client with AWS ECR.
 (The repo url can be retrieved from AWS UI or Terraform outputs):
-```aws ecr get-login-password --region eu-central-2 | docker login --username AWS --password-stdin <my-repo-url>```
+```aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin <my-repo-url>```
 - Tag local image with ECR repo URL:
 ```docker tag taskapi:latest <my-repo-url>:latest```
 - Push the tagged image to ECR:
@@ -82,7 +83,7 @@ Steps to follow:
     - containerPort: 8080
 ```
 - Configure local kubeconfig to connect kubectl to EKS cluster:
-```aws eks --region eu-central-2 update-kubeconfig --name aws-infra-showcase-eks```
+```aws eks --region eu-central-1 update-kubeconfig --name aws-infra-showcase-eks```
 - Apply your Kubernetes manifests (deployments, services):
 ```kubectl apply -f k8s/```
 - Verify service and get external IP or DNS:
@@ -91,12 +92,11 @@ Steps to follow:
 ## Project directory set up:
 ```
 aws-java-mongo-demo/
-├── app/                    # Java Spring Boot app 
-├── docker/                 # Dockerfile
+├── app/                    # Java Backend API built with Spring Boot 
+│   ├── docker/             # Dockerfile
 ├── terraform/
 │   ├── vpc/                # VPC module
 │   ├── eks/                # Cluster infra
-│   ├── alb/ or apigw/      # Load balancer/gateway
-│   └── mongodb/            # MongoDB setup (EC2 or docs)
+│   └── mongodb/            # MongoDB setup (EC2 or docs) - todo
 └── README.md
 ```
