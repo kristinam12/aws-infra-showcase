@@ -13,3 +13,8 @@ module "eks" {
   project_name = var.project_name
   subnet_ids   = [module.vpc.public_subnet_id]  # <-- this must match your VPC output
 }
+
+# To create ECR repository for Docker image
+resource "aws_ecr_repository" "taskapi" {
+  name = "taskapi"
+}
