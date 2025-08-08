@@ -1,10 +1,10 @@
 variable "aws_region" {
-  default = "eu-central-2"
+  default = "eu-central-1"
 }
 
 # Specify the availability zone (a 'data center' in a region)
 variable "aws_zone" {
-  default = "eu-central-2a"
+  default = "eu-central-1a"
 }
 
 variable "project_name" {

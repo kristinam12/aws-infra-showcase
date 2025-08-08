@@ -25,6 +25,7 @@ Key components:
 This setup allows you to deploy containerized applications on Kubernetes in a scalable way, while offloading operational overhead to AWS.
 
 # Set up infrastructure with Terraform:
+- Login AWS: ```aws configure```
 - Navigate to: ```cd aws-infra-showcase/terraform```
 - Initialize Terraform:
 ```terraform init```       
@@ -36,7 +37,7 @@ This setup allows you to deploy containerized applications on Kubernetes in a sc
 ```terraform destroy```
 
 ## Task API - Java Sprint Boot
-A simple Java Sprint Boot REST API (https://start.spring.io/) to manage tasks as the backend component for task management &  this demo project.
+A simple Java Sprint Boot REST API (https://start.spring.io/) to manage tasks as the backend component for task management & this demo project.
 It exposes endpoints (e.g., /api/tasks) to create, read, update, and delete tasks. This API is part of the overall app infrastructure, designed to be deployed on AWS EKS with Terraform.
 
 For local testing purposes:
@@ -61,7 +62,7 @@ For building the image:
 For pushing the image to ECR:
 - Authenticate your Docker client with AWS ECR.
 (The repo url can be retrieved from AWS UI or Terraform outputs):
-```aws ecr get-login-password --region eu-central-2 | docker login --username AWS --password-stdin <my-repo-url>```
+```aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin <my-repo-url>```
 - Tag local image with ECR repo URL:
 ```docker tag taskapi:latest <my-repo-url>:latest```
 - Push the tagged image to ECR:
@@ -82,7 +83,7 @@ Steps to follow:
     - containerPort: 8080
 ```
 - Configure local kubeconfig to connect kubectl to EKS cluster:
-```aws eks --region eu-central-2 update-kubeconfig --name aws-infra-showcase-eks```
+```aws eks --region eu-central-1 update-kubeconfig --name aws-infra-showcase-eks```
 - Apply your Kubernetes manifests (deployments, services):
 ```kubectl apply -f k8s/```
 - Verify service and get external IP or DNS:
