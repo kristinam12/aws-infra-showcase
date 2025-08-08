@@ -29,6 +29,18 @@ After the EKS cluster is created, you configure your local environment to connec
 
 You then deploy your application manifests (YAML files defining deployments and services) to run your app in Kubernetes pods. The deployment manages the number of replicas (copies) of your app to run for availability. A service of type LoadBalancer exposes your app publicly, routing internet traffic to your pods.
 
+## Task API - Java Sprint Boot
+A simple Java Sprint Boot REST API (https://start.spring.io/) to manage tasks as the backend component for task management &  this demo project.
+It exposes endpoints (e.g., /api/tasks) to create, read, update, and delete tasks. This API is part of the overall app infrastructure, designed to be deployed on AWS EKS with Terraform.
+
+For local testing purposes:
+- Ensure you have Java 17+ installed:
+```choco install openjdk```
+- Run the application with:
+```./mvnw spring-boot:run```
+- Open the browser and visit:
+```http://localhost:8080/api/tasks```
+
 ## Project directory set up:
 ```
 aws-java-mongo-demo/
